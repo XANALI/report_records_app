@@ -11,13 +11,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 @SuppressWarnings("InfiniteLoopStatement")
-public class ClientHandler extends Thread {
+public class UserHandler extends Thread {
     private Socket socket;
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
     private DataLoader dataLoader;
 
-    ClientHandler(Socket socket, DataLoader dataLoader) throws IOException {
+    UserHandler(Socket socket, DataLoader dataLoader) throws IOException {
         this.socket = socket;
         oos = new ObjectOutputStream(socket.getOutputStream());
         ois = new ObjectInputStream(socket.getInputStream());

@@ -22,10 +22,10 @@ public class RecordServer {
                 System.out.println("Client connected: " + socket.getInetAddress().getHostAddress());
 
                 // Making a new ClientHandler for each client
-                ClientHandler clientHandler = new ClientHandler(socket, dataLoader);
+                UserHandler userHandler = new UserHandler(socket, dataLoader);
 
                 // Starting of relations client and server
-                clientHandler.start();
+                userHandler.start();
             }
         }catch (IOException e){
             e.printStackTrace();

@@ -16,8 +16,10 @@ public class RegisterController {
 
     private void registration(){
         System.out.println("REGISTRATION");
+
         System.out.println("Username:");
         String username = scanner.next();
+
         System.out.println("Password:");
         String password = scanner.next();
 
@@ -31,7 +33,7 @@ public class RegisterController {
         }
     }
 
-    public void setClient(){
+    public void addUser(){
         registration();
     }
 }

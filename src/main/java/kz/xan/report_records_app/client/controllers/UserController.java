@@ -2,19 +2,20 @@ package kz.xan.report_records_app.client.controllers;
 
 import kz.xan.report_records_app.client.Connection;
 import kz.xan.report_records_app.client.Request;
+import kz.xan.report_records_app.domain.RoleEnum;
 import kz.xan.report_records_app.domain.User;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 @SuppressWarnings("InfiniteLoopStatement")
-public class ClientController {
+public class UserController {
     private final Connection connection;
     private final Scanner scanner;
 
     private static User user;
 
-    public ClientController(Connection connection, Scanner scanner) {
+    public UserController(Connection connection, Scanner scanner) {
         this.connection = connection;
         this.scanner = scanner;
         user = null;
@@ -28,23 +29,23 @@ public class ClientController {
         return scanner;
     }
 
-    private boolean clientLogin(){
+    private boolean userLogin(){
         LoginController login = new LoginController(connection, scanner);
-        user = login.getClient();
+        user = login.getUser();
 
         if(user == null){
-            throw new RuntimeException("User not found!");
-        }else {
-            System.out.println(user);
+            return false;
         }
+
+        System.out.println(user);
 
         return true;
     }
 
-    private void clientRegister(){
+    private void userRegister(){
         RegisterController registerController = new RegisterController(connection, scanner);
 
-        registerController.setClient();
+        registerController.addUser();
     }
 
     private void closeConnection(){
@@ -56,6 +57,17 @@ public class ClientController {
             connection.closeSocket();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void openClientPanels(){
+        if(user != null){
+            RoleEnum role = user.getRole();
+            if(role.equals(RoleEnum.ADMIN)){
+
+            }else if(role.equals(RoleEnum.CLIENT)){
+
+            }
         }
     }
 
@@ -73,9 +85,12 @@ public class ClientController {
                 closeConnection();
                 break;
             }else if(choice == 1){
-                clientLogin();
+                boolean loginStat = userLogin();
+                if(loginStat){
+
+                }
             }else if(choice == 2){
-                clientRegister();
+                userRegister();
             }
         }
     }

@@ -17,7 +17,7 @@ public class LoginController {
         this.scanner = scanner;
     }
 
-    public User foundUser(String username, String password){
+    private User foundUser(String username, String password){
         Request request = new Request("GET_USER");
         request.setUsername(username);
         request.setPassword(password);
@@ -35,16 +35,17 @@ public class LoginController {
         return user;
     }
 
-    public User login(){
+    private User login(){
         System.out.println("Enter a username:");
         String username = scanner.next();
+
         System.out.println("Enter a password");
         String password = scanner.next();
 
         return foundUser(username, password);
     }
 
-    public User getClient () {
+    public User getUser () {
         User user = login();
 
         return user;
