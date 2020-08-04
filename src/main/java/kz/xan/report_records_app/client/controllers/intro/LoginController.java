@@ -1,20 +1,18 @@
-package kz.xan.report_records_app.client.controllers;
+package kz.xan.report_records_app.client.controllers.intro;
 
 import kz.xan.report_records_app.client.Connection;
 import kz.xan.report_records_app.client.Request;
+import kz.xan.report_records_app.client.controllers.BaseController;
 import kz.xan.report_records_app.domain.User;
 import kz.xan.report_records_app.server.Reply;
 
 import java.util.Scanner;
 
 
-public class LoginController {
-    private final Connection connection;
-    private final Scanner scanner;
+public class LoginController extends BaseController {
 
     public LoginController(Connection connection, Scanner scanner) {
-        this.connection = connection;
-        this.scanner = scanner;
+        super(connection, scanner);
     }
 
     private User foundUser(String username, String password){

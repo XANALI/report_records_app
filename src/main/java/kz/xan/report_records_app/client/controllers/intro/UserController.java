@@ -1,7 +1,11 @@
-package kz.xan.report_records_app.client.controllers;
+package kz.xan.report_records_app.client.controllers.intro;
 
 import kz.xan.report_records_app.client.Connection;
 import kz.xan.report_records_app.client.Request;
+import kz.xan.report_records_app.client.controllers.BaseController;
+import kz.xan.report_records_app.client.controllers.panel.PanelController;
+import kz.xan.report_records_app.client.controllers.panel.admin.AdminPanelController;
+import kz.xan.report_records_app.client.controllers.panel.client.ClientPanelController;
 import kz.xan.report_records_app.domain.RoleEnum;
 import kz.xan.report_records_app.domain.User;
 
@@ -9,24 +13,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 @SuppressWarnings("InfiniteLoopStatement")
-public class UserController {
-    private final Connection connection;
-    private final Scanner scanner;
+public class UserController extends BaseController {
 
     private static User user;
 
     public UserController(Connection connection, Scanner scanner) {
-        this.connection = connection;
-        this.scanner = scanner;
+        super(connection, scanner);
         user = null;
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public Scanner getScanner() {
-        return scanner;
     }
 
     private boolean userLogin(){
@@ -60,13 +53,19 @@ public class UserController {
         }
     }
 
-    private void openClientPanels(){
+    private void openUserPanel(){
         if(user != null){
             RoleEnum role = user.getRole();
+
+            PanelController panel = null;
             if(role.equals(RoleEnum.ADMIN)){
-
+                panel = new AdminPanelController(connection, scanner, user);
             }else if(role.equals(RoleEnum.CLIENT)){
+                panel = new ClientPanelController(connection, scanner, user);
+            }
 
+            if(panel != null){
+                panel.start();
             }
         }
     }
@@ -87,7 +86,7 @@ public class UserController {
             }else if(choice == 1){
                 boolean loginStat = userLogin();
                 if(loginStat){
-
+                    openUserPanel();
                 }
             }else if(choice == 2){
                 userRegister();

@@ -2,7 +2,7 @@ package kz.xan.report_records_app.client;
 
 
 import kz.xan.report_records_app.bootstrap.DataLoader;
-import kz.xan.report_records_app.client.controllers.UserController;
+import kz.xan.report_records_app.client.controllers.intro.UserController;
 
 import java.io.IOException;
 import java.net.Socket;

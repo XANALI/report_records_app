@@ -1,17 +1,15 @@
-package kz.xan.report_records_app.client.controllers;
+package kz.xan.report_records_app.client.controllers.intro;
 
 import kz.xan.report_records_app.client.Connection;
 import kz.xan.report_records_app.client.Request;
+import kz.xan.report_records_app.client.controllers.BaseController;
 
 import java.util.Scanner;
 
-public class RegisterController {
-    private final Connection connection;
-    private final Scanner scanner;
+public class RegisterController extends BaseController {
 
     public RegisterController(Connection connection, Scanner scanner) {
-        this.connection = connection;
-        this.scanner = scanner;
+        super(connection, scanner);
     }
 
     private void registration(){
