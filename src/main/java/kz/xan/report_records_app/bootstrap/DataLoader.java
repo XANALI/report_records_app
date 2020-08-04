@@ -34,4 +34,8 @@ public class DataLoader {
 
         return u.stream().findFirst().orElse(null);
     }
+
+    public void removeUser(User user){
+        users.remove(user);
+    }
 }

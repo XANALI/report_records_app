@@ -89,6 +89,12 @@ public class UserHandler extends Thread {
                     user.setRole(RoleEnum.CLIENT);
 
                     dataLoader.addUser(user);
+                }else if(code.equals("REMOVE_USER")){
+                    User user = request.getUser();
+
+                    if(user != null){
+                        dataLoader.removeUser(user);
+                    }
                 }
             }catch (IOException | ClassNotFoundException e){
                 e.printStackTrace();

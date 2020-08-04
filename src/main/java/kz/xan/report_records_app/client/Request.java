@@ -1,5 +1,7 @@
 package kz.xan.report_records_app.client;
 
+import kz.xan.report_records_app.domain.User;
+
 import java.io.Serializable;
 
 public class Request implements Serializable {
@@ -7,6 +9,8 @@ public class Request implements Serializable {
 
     private String username;
     private String password;
+
+    private User user;
 
     public Request() {
     }
@@ -37,5 +41,13 @@ public class Request implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
