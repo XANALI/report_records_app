@@ -5,9 +5,6 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
     private Long ID;
 
-    BaseEntity() {
-    }
-
     BaseEntity(Long ID) {
         this.ID = ID;
     }

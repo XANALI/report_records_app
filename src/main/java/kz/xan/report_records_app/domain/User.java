@@ -1,14 +1,22 @@
 package kz.xan.report_records_app.domain;
 
 public class User extends BaseEntity {
+    private static Long userID = 0L;
+
     private String username;
     private String password;
     private RoleEnum role;
 
     public User() {
+        super(userID++);
+    }
+
+    public User(Long ID) {
+        super(ID);
     }
 
     public User(String username, String password, RoleEnum role) {
+        super(userID++);
         this.username = username;
         this.password = password;
         this.role = role;

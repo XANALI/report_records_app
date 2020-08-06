@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Record extends BaseEntity {
+    private static Long recordID = 0L;
+
     private LocalDate date;
     private String carModel;
     private String vin;
@@ -14,11 +16,16 @@ public class Record extends BaseEntity {
     private Long userID;
 
     public Record() {
-        super();
+        super(recordID++);
+    }
+
+    public Record(Long ID){
+        super(ID);
     }
 
     public Record(LocalDate date, String carModel, String vin, RecordState recordState,
                   RecordStatus recordStatus, Integer sum, LocalDateTime recordDateTime, Long userID) {
+        super(recordID++);
         this.date = date;
         this.carModel = carModel;
         this.vin = vin;
