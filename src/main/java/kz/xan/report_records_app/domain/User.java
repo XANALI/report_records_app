@@ -1,8 +1,6 @@
 package kz.xan.report_records_app.domain;
 
-import java.io.Serializable;
-
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity {
     private String username;
     private String password;
     private RoleEnum role;

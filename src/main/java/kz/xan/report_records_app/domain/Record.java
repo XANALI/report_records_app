@@ -1,10 +1,9 @@
 package kz.xan.report_records_app.domain;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Record extends BaseEntity implements Serializable {
+public class Record extends BaseEntity {
     private LocalDate date;
     private String carModel;
     private String vin;
@@ -105,5 +104,19 @@ public class Record extends BaseEntity implements Serializable {
 
     public void setUserID(Long userID) {
         this.userID = userID;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "date=" + date +
+                ", carModel='" + carModel + '\'' +
+                ", vin='" + vin + '\'' +
+                ", recordState=" + recordState +
+                ", recordStatus=" + recordStatus +
+                ", sum=" + sum +
+                ", recordDateTime=" + recordDateTime +
+                ", userID=" + userID +
+                '}';
     }
 }

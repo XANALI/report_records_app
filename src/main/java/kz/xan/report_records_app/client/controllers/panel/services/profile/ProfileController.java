@@ -1,19 +1,17 @@
-package kz.xan.report_records_app.client.controllers.panel;
+package kz.xan.report_records_app.client.controllers.panel.services.profile;
 
-import kz.xan.report_records_app.client.Connection;
-import kz.xan.report_records_app.client.Request;
-import kz.xan.report_records_app.client.controllers.BaseController;
+import kz.xan.report_records_app.client.controllers.panel.services.ServiceController;
+import kz.xan.report_records_app.client.main.Connection;
+import kz.xan.report_records_app.client.main.Request;
 import kz.xan.report_records_app.domain.User;
 
 import java.util.Scanner;
 
-public class ProfileController extends BaseController {
+public class ProfileController extends ServiceController {
 
-    private final User user;
 
     public ProfileController(Connection connection, Scanner scanner, User user) {
-        super(connection, scanner);
-        this.user = user;
+        super(connection, scanner, user);
     }
 
     private void editUsername(){

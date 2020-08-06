@@ -1,6 +1,6 @@
 package kz.xan.report_records_app.client.controllers;
 
-import kz.xan.report_records_app.client.Connection;
+import kz.xan.report_records_app.client.main.Connection;
 
 import java.util.Scanner;
 

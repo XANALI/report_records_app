@@ -1,4 +1,4 @@
-package kz.xan.report_records_app.client;
+package kz.xan.report_records_app.client.main;
 
 
 import kz.xan.report_records_app.server.Reply;

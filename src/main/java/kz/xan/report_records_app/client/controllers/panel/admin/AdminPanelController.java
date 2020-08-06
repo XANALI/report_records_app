@@ -1,7 +1,7 @@
 package kz.xan.report_records_app.client.controllers.panel.admin;
 
-import kz.xan.report_records_app.client.Connection;
 import kz.xan.report_records_app.client.controllers.panel.PanelController;
+import kz.xan.report_records_app.client.main.Connection;
 import kz.xan.report_records_app.domain.User;
 
 import java.util.Scanner;
@@ -27,7 +27,11 @@ public class AdminPanelController extends PanelController {
             if(choice == 0){
                 break;
             }else if(choice == 1){
-                showProfile();
+                getProfile();
+            }else if(choice == 2){
+
+            }else if(choice == 3){
+                getRecords();
             }
         }
     }

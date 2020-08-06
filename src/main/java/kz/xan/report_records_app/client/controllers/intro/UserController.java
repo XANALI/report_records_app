@@ -1,11 +1,11 @@
 package kz.xan.report_records_app.client.controllers.intro;
 
-import kz.xan.report_records_app.client.Connection;
-import kz.xan.report_records_app.client.Request;
 import kz.xan.report_records_app.client.controllers.BaseController;
 import kz.xan.report_records_app.client.controllers.panel.PanelController;
 import kz.xan.report_records_app.client.controllers.panel.admin.AdminPanelController;
 import kz.xan.report_records_app.client.controllers.panel.client.ClientPanelController;
+import kz.xan.report_records_app.client.main.Connection;
+import kz.xan.report_records_app.client.main.Request;
 import kz.xan.report_records_app.domain.RoleEnum;
 import kz.xan.report_records_app.domain.User;
 

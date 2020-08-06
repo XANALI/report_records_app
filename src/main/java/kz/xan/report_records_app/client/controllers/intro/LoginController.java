@@ -1,8 +1,8 @@
 package kz.xan.report_records_app.client.controllers.intro;
 
-import kz.xan.report_records_app.client.Connection;
-import kz.xan.report_records_app.client.Request;
 import kz.xan.report_records_app.client.controllers.BaseController;
+import kz.xan.report_records_app.client.main.Connection;
+import kz.xan.report_records_app.client.main.Request;
 import kz.xan.report_records_app.domain.User;
 import kz.xan.report_records_app.server.Reply;
 

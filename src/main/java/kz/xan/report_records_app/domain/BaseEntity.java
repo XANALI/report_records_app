@@ -1,6 +1,8 @@
 package kz.xan.report_records_app.domain;
 
-public class BaseEntity {
+import java.io.Serializable;
+
+public class BaseEntity implements Serializable {
     private Long ID;
 
     BaseEntity() {
