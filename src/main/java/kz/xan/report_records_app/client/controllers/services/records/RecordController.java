@@ -1,6 +1,6 @@
-package kz.xan.report_records_app.client.controllers.panel.services.records;
+package kz.xan.report_records_app.client.controllers.services.records;
 
-import kz.xan.report_records_app.client.controllers.panel.services.ServiceController;
+import kz.xan.report_records_app.client.controllers.services.ServiceController;
 import kz.xan.report_records_app.client.main.Connection;
 import kz.xan.report_records_app.client.main.Request;
 import kz.xan.report_records_app.domain.Record;
@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class RecordController extends ServiceController {
@@ -138,6 +139,8 @@ public class RecordController extends ServiceController {
         connection.sendRequest(request);
     }
 
+
+
     private Record chooseRecord(){
         Request request = new Request("GET_RECORDS_BY_USER_ID");
         request.setUserID(user.getID());
@@ -151,7 +154,8 @@ public class RecordController extends ServiceController {
         }
 
         // converting set to arrayList
-        List<Record> recordsList = new ArrayList<>(reply.getRecords());
+        Map<Long, Record> records = reply.getRecords();
+        List<Record> recordsList = new ArrayList<>(records.values());
         while (true) {
             System.out.println("Choose Record");
 
@@ -171,6 +175,8 @@ public class RecordController extends ServiceController {
         }
     }
 
+
+
     private void removeRecord(){
         Record record = chooseRecord();
 
@@ -181,6 +187,8 @@ public class RecordController extends ServiceController {
             connection.sendRequest(request);
         }
     }
+
+
 
     private void editRecordDate(Record record){
         System.out.println("Old Date: " + record.getDate());
@@ -266,12 +274,33 @@ public class RecordController extends ServiceController {
 
     }
 
+
+    private void showRecords(){
+        Request request = new Request("GET_RECORDS_BY_USER_ID");
+        request.setUserID(user.getID());
+
+        connection.sendRequest(request);
+
+        Reply reply = connection.getReply();
+        if(reply.getCode().equals("RECORDS_NOT_FOUND")){
+            System.out.println("RECORDS NOT FOUND");
+            return;
+        }
+
+        // converting set to arrayList
+        List<Record> recordsList = new ArrayList<>(reply.getRecords().values());
+        for(Record record : recordsList){
+            System.out.println(record);
+        }
+    }
+
     private void showFunctionality(){
         while (true) {
             System.out.println("RECORDS");
             System.out.println("1. Add Record");
             System.out.println("2. Remove Record");
             System.out.println("3. Edit Record");
+            System.out.println("4. Show records");
             System.out.println("0. Close");
 
             int choice = scanner.nextInt();
@@ -284,6 +313,8 @@ public class RecordController extends ServiceController {
                 removeRecord();
             }else if(choice == 3){
                 editRecord();
+            }else if(choice == 4){
+                showRecords();
             }
         }
     }

@@ -27,7 +27,10 @@ public class ClientPanelController extends PanelController {
             if(choice == 0){
                 break;
             }else if(choice == 1){
-                getProfile();
+                user = getProfile();
+                if(user == null){
+                    break;
+                }
             }else if(choice == 2){
                 getRecords();
             }

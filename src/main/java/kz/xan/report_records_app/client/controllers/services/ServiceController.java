@@ -1,4 +1,4 @@
-package kz.xan.report_records_app.client.controllers.panel.services;
+package kz.xan.report_records_app.client.controllers.services;
 
 import kz.xan.report_records_app.client.controllers.BaseController;
 import kz.xan.report_records_app.client.main.Connection;
@@ -7,7 +7,7 @@ import kz.xan.report_records_app.domain.User;
 import java.util.Scanner;
 
 public class ServiceController extends BaseController {
-    protected final User user;
+    protected User user;
 
     public ServiceController(Connection connection, Scanner scanner, User user) {
         super(connection, scanner);

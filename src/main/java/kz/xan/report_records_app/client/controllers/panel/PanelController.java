@@ -1,15 +1,15 @@
 package kz.xan.report_records_app.client.controllers.panel;
 
 import kz.xan.report_records_app.client.controllers.BaseController;
-import kz.xan.report_records_app.client.controllers.panel.services.profile.ProfileController;
-import kz.xan.report_records_app.client.controllers.panel.services.records.RecordController;
+import kz.xan.report_records_app.client.controllers.services.profile.ProfileController;
+import kz.xan.report_records_app.client.controllers.services.records.RecordController;
 import kz.xan.report_records_app.client.main.Connection;
 import kz.xan.report_records_app.domain.User;
 
 import java.util.Scanner;
 
 public abstract class PanelController extends BaseController {
-    protected final User user;
+    protected User user;
 
     public PanelController(Connection connection, Scanner scanner, User user) {
         super(connection, scanner);
@@ -22,9 +22,9 @@ public abstract class PanelController extends BaseController {
 
     protected abstract void showServices();
 
-    protected void getProfile(){
+    protected User getProfile(){
         ProfileController profileController = new ProfileController(connection, scanner, user);
-        profileController.getProfile();
+        return profileController.getProfile();
     }
 
     protected void getRecords(){

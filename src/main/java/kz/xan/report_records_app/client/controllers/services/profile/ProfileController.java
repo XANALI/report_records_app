@@ -1,6 +1,6 @@
-package kz.xan.report_records_app.client.controllers.panel.services.profile;
+package kz.xan.report_records_app.client.controllers.services.profile;
 
-import kz.xan.report_records_app.client.controllers.panel.services.ServiceController;
+import kz.xan.report_records_app.client.controllers.services.ServiceController;
 import kz.xan.report_records_app.client.main.Connection;
 import kz.xan.report_records_app.client.main.Request;
 import kz.xan.report_records_app.domain.User;
@@ -67,6 +67,8 @@ public class ProfileController extends ServiceController {
         Request request = new Request("REMOVE_USER");
         request.setUser(user);
 
+        user = null;
+
         connection.sendRequest(request);
     }
 
@@ -93,7 +95,8 @@ public class ProfileController extends ServiceController {
         }
     }
 
-    public void getProfile(){
+    public User getProfile(){
         showService();
+        return user;
     }
 }
