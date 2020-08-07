@@ -2,6 +2,7 @@ package kz.xan.report_records_app.server;
 
 import kz.xan.report_records_app.bootstrap.DataLoader;
 import kz.xan.report_records_app.client.main.Request;
+import kz.xan.report_records_app.database.DatabaseHandler;
 import kz.xan.report_records_app.domain.Record;
 import kz.xan.report_records_app.domain.RoleEnum;
 import kz.xan.report_records_app.domain.User;
@@ -10,7 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Set;
+import java.sql.SQLException;
+import java.util.Map;
 
 @SuppressWarnings("InfiniteLoopStatement")
 public class UserHandler extends Thread {
@@ -18,6 +20,7 @@ public class UserHandler extends Thread {
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
     private DataLoader dataLoader;
+    private DatabaseHandler databaseHandler;
 
     UserHandler(Socket socket, DataLoader dataLoader) throws IOException {
         this.socket = socket;
@@ -25,6 +28,7 @@ public class UserHandler extends Thread {
         ois = new ObjectInputStream(socket.getInputStream());
 
         this.dataLoader = dataLoader;
+        databaseHandler = new DatabaseHandler();
     }
 
     public void closeInputStream() throws IOException {
@@ -68,7 +72,7 @@ public class UserHandler extends Thread {
 
                     User user = null;
                     if(username != null && password != null){
-                        user = dataLoader.getUserByUsernameAndPassword(username, password);
+                        user = databaseHandler.getUserByUsernameAndPassword(username, password);
                     }
 
                     Reply reply;
@@ -90,40 +94,43 @@ public class UserHandler extends Thread {
                     user.setPassword(password);
                     user.setRole(RoleEnum.CLIENT);
 
-                    dataLoader.addUser(user);
+                    databaseHandler.addUser(user);
                 }else if(code.equals("REMOVE_USER")){
                     User user = request.getUser();
 
                     if(user != null){
-                        dataLoader.removeUser(user);
+                        databaseHandler.removeUser(user);
                     }
                 }else if(code.equals("ADD_RECORD")){
                     Record record = request.getRecord();
 
-                    dataLoader.addRecord(record);
+                    if(record != null){
+                        databaseHandler.addRecord(record);
+                    }
                 }else if(code.equals("GET_RECORDS_BY_USER_ID")){
                     Long userID = request.getUserID();
 
-                    Set<Record> records = dataLoader.getRecordsByUserID(userID);
+                    Map<Long, Record> records = databaseHandler.getRecordsByUserID(userID);
 
                     Reply reply = new Reply();
                     if(records == null){
                         reply.setCode("RECORDS_NOT_FOUND");
+                    }else {
+                        reply.setCode("RECORDS_FOUND");
                     }
-                    reply.setCode("RECORDS_FOUND");
                     reply.setRecords(records);
 
                     oos.writeObject(reply);
                 }else if(code.equals("REMOVE_RECORD")){
                     Record record = request.getRecord();
 
-                    dataLoader.removeRecord(record);
+                    databaseHandler.removeRecord(record);
                 }else if(code.equals("SAVE_EDITED_RECORD")){
                     Record record = request.getRecord();
 
-                    dataLoader.changeRecord(record);
+                    databaseHandler.changeRecord(record);
                 }
-            }catch (IOException | ClassNotFoundException e){
+            }catch (IOException | ClassNotFoundException | SQLException e){
                 e.printStackTrace();
             }
         }

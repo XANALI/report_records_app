@@ -17,13 +17,14 @@ public class DataLoader {
 
     public DataLoader() {
         users = Stream.of(
-                    new User(1L,"ali", "ali", RoleEnum.ADMIN),
-                    new User(2L,"aa", "bb", RoleEnum.CLIENT)
+                    new User("ali", "ali", RoleEnum.ADMIN),
+                    new User("aa", "bb", RoleEnum.CLIENT)
                 ).collect(Collectors.toCollection(HashSet::new));
 
         records = Stream.of(
-                    new Record(1L, LocalDate.now(), "a", "b", RecordState.TRADE_IN, RecordStatus.WITHDRAWAL, 2000, LocalDateTime.now(), 1L),
-                    new Record(2L, LocalDate.now(), "c", "d", RecordState.TRADE_IN, RecordStatus.WITHDRAWAL, 2000, LocalDateTime.now(), 2L)
+                    new Record(LocalDate.now(), "a", "b", RecordState.TRADE_IN, RecordStatus.WITHDRAWAL, 2000, LocalDateTime.now(), 0L),
+                    new Record(LocalDate.now(), "c", "d", RecordState.TRADE_IN, RecordStatus.WITHDRAWAL, 2000, LocalDateTime.now(), 2L),
+                    new Record(LocalDate.of(2018,5, 21), "c", "d", RecordState.TRADE_IN, RecordStatus.WITHDRAWAL, 2000, LocalDateTime.now(), 2L)
                 ).collect(Collectors.toCollection(HashSet::new));
     }
 
@@ -57,9 +58,11 @@ public class DataLoader {
 
     public Set<Record> getRecordsByUserID(Long ID){
 
+        System.out.println("GET RECORDS BY ID:" + ID);
+
         return records.stream()
                 .filter(record -> record.getUserID().equals(ID))
-                .sorted(Comparator.comparing(BaseEntity::getID))
+                .sorted(Comparator.comparing(Record::getDate))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

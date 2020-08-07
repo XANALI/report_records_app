@@ -49,6 +49,10 @@ public class User extends BaseEntity {
         return role;
     }
 
+    public String getRoleString() {
+        return role.name();
+    }
+
     public void setRole(RoleEnum role) {
         this.role = role;
     }

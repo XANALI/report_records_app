@@ -4,7 +4,7 @@ import kz.xan.report_records_app.domain.Record;
 import kz.xan.report_records_app.domain.User;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Map;
 
 public class Reply implements Serializable {
     private String code;
@@ -13,7 +13,7 @@ public class Reply implements Serializable {
 
     private Long userID;
 
-    private Set<Record> records;
+    private Map<Long, Record> records;
 
     public Reply() {
     }
@@ -46,11 +46,11 @@ public class Reply implements Serializable {
         this.userID = userID;
     }
 
-    public Set<Record> getRecords() {
+    public Map<Long, Record> getRecords() {
         return records;
     }
 
-    public void setRecords(Set<Record> records) {
+    public void setRecords(Map<Long, Record> records) {
         this.records = records;
     }
 }

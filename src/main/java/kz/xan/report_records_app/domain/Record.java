@@ -2,6 +2,7 @@ package kz.xan.report_records_app.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Record extends BaseEntity {
     private static Long recordID = 0L;
@@ -111,6 +112,18 @@ public class Record extends BaseEntity {
 
     public void setUserID(Long userID) {
         this.userID = userID;
+    }
+
+
+    public String getDateString(){
+        String date = this.date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+        return date;
+    }
+
+    public String getDateTimeString(){;
+
+        return recordDateTime.toString();
     }
 
     @Override
