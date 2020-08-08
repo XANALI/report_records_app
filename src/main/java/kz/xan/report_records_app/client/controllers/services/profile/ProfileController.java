@@ -67,9 +67,9 @@ public class ProfileController extends ServiceController {
         Request request = new Request("REMOVE_USER");
         request.setUser(user);
 
-        user = null;
-
         connection.sendRequest(request);
+
+        user = null;
     }
 
     private void showService(){

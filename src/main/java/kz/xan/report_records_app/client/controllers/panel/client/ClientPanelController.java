@@ -4,6 +4,7 @@ import kz.xan.report_records_app.client.controllers.panel.PanelController;
 import kz.xan.report_records_app.client.main.Connection;
 import kz.xan.report_records_app.domain.User;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ClientPanelController extends PanelController {
@@ -33,6 +34,12 @@ public class ClientPanelController extends PanelController {
                 }
             }else if(choice == 2){
                 getRecords();
+            }else if(choice == 3){
+                try {
+                    getReports();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

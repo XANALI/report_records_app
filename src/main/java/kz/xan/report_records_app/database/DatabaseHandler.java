@@ -51,10 +51,6 @@ public class DatabaseHandler extends DatabaseConfig {
     }
 
     private User userForm(ResultSet resultSet) throws SQLException {
-        if(resultSet == null){
-            return null;
-        }
-
         Integer ID = resultSet.getInt(1);
         String username = resultSet.getString(2);
         String password = resultSet.getString(3);
@@ -77,7 +73,9 @@ public class DatabaseHandler extends DatabaseConfig {
         PreparedStatement preparedStatement = connection.prepareStatement(GET_USER);
         preparedStatement.setInt(1, ID.intValue());
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
+        if(!resultSet.next()){
+            return null;
+        }
 
         User user = userForm(resultSet);
 
@@ -91,7 +89,9 @@ public class DatabaseHandler extends DatabaseConfig {
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
+        if(!resultSet.next()){
+            return null;
+        }
 
         User user = userForm(resultSet);
 

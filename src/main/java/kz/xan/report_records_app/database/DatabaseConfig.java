@@ -89,7 +89,7 @@ class DatabaseConfig {
 
     protected String RECORD_USER_ID = " user_id ";
     protected String RECORD_USER_ID_TYPE = "int ";
-    protected String RECORD_USER_ID_CONSTRAINTS = "REFERENCES" + USER_TABLE + "(" + USER_ID + ")";
+    protected String RECORD_USER_ID_CONSTRAINTS = "REFERENCES" + USER_TABLE + "(" + USER_ID + ")" + " ON DELETE CASCADE";
 
     protected String CREATE_RECORD_TABLE =
             CREATE_TABLE + RECORD_TABLE + "("
