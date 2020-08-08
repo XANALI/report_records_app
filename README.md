@@ -1,2 +1,4 @@
 # report_records_app
-Server-client app to get Report of added records
+Console based multithreading server-client app to get Report of added records
+
+This is just a demo version.
